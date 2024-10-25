@@ -1,0 +1,22 @@
+version: '3.8'  # Use the appropriate version
+
+services:
+  app:
+    build:
+      context: ./nodejs 
+      dockerfile: Dockerfile  
+    ports:
+      - "3000:3000"  
+    volumes:
+      - ./nodejs:/usr/src/app
+    
+  mongo:
+    image: mongo
+    restart: always
+    volumes:
+     - mongo-db:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+volumes:
+ mongo-db:
